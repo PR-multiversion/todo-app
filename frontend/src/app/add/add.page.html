@@ -1,0 +1,32 @@
+<ion-header class="header">
+  <ion-toolbar>
+    <ion-icon name="chevron-back-outline" class="back-btn" routerLink="/"></ion-icon>
+    <ion-title slot="end">{{id? 'Update Task':'Add Task'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-toast [isOpen]="isToastOpen" message="msg" [duration]="5000" (didDismiss)="setOpen(false)"
+  position="top"></ion-toast><ion-toast [isOpen]="isToastOpen" [message]="msg" [duration]="5000"
+  (didDismiss)="setOpen(false)" position="top"></ion-toast>
+
+
+<ion-content class="ion-padding" [fullscreen]="true" scrollY="false">
+  <ion-input class="custom-inp" style="margin-bottom: 30px; margin-top: 30px;" fill="outline" label="Task Name"
+    labelPlacement="floating" placeholder="name" [(ngModel)]="taskname"></ion-input>
+  <ion-input style="margin-bottom: 30px;" type="date" label="Date & Time" labelPlacement="floating" fill="outline"
+    [(ngModel)]="date"></ion-input>
+  <div class="time">
+    <ion-input type="time" label="Start Time" labelPlacement="floating" fill="outline"
+      [(ngModel)]="startTime"></ion-input>
+    <ion-input type="time" label="End Time" labelPlacement="floating" fill="outline" [(ngModel)]="endTime"></ion-input>
+  </div>
+  <ion-textarea style="margin-bottom: 30px;" rows="10" label="Description" labelPlacement="floating" fill="outline"
+    [(ngModel)]="description"></ion-textarea>
+
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-button class="ion-padding" expand="block" (click)="id? updateData(id): addTask()">
+    {{id? 'UPDATE TASK':'ADD TASK'}}
+  </ion-button>
+</ion-footer>

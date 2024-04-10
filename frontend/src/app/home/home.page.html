@@ -1,0 +1,103 @@
+<ion-toast [isOpen]="isToastOpen" message="msg" [duration]="5000" (didDismiss)="setOpen(false)"
+  position="top"></ion-toast><ion-toast [isOpen]="isToastOpen" [message]="msg" [duration]="5000"
+  (didDismiss)="setOpen(false)" position="top"></ion-toast>
+
+
+<ion-content class="root-content ion-padding" [fullscreen]="true" scrollY="false">
+  <ion-toolbar>
+    <ion-text>
+      <h3>Hello <span>PR,</span></h3>
+      <p>You have work today</p>
+    </ion-text>
+    <ion-buttons slot="end">
+      <ion-button> <ion-icon name="notifications-outline"></ion-icon> </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding">
+
+        <ion-card class="header-card" style="background-color: #b4c4ff;">
+
+          <ion-card-content>
+            <ion-icon name="time-outline" class="category-icon"></ion-icon>
+            <div class="header-card-type">
+              <span>Today</span>
+              <span class="count today-count">{{todayTaskCount}}</span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      <ion-col class="ion-no-padding">
+        <ion-card class="header-card" style="background-color: #fff57f;">
+          <ion-card-content>
+            <ion-icon name="stopwatch-outline" class="category-icon"></ion-icon>
+            <div class="header-card-type">
+              <span>Scheduled</span>
+              <span class="count today-count">5</span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding">
+
+        <ion-card class="header-card" style="background-color: #cff3e9;">
+          <ion-card-content>
+            <ion-icon name="repeat" class="category-icon" style="background-color: #abdbe2;"></ion-icon>
+            <div class="header-card-type">
+              <span>All</span>
+              <span class="count today-count">14</span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      <ion-col class="ion-no-padding">
+        <ion-card class="header-card" style="background-color: #ffc0f5;">
+
+          <ion-card-content>
+            <ion-icon name="timer-outline" class="category-icon"></ion-icon>
+            <div class="header-card-type">
+              <span>Overdue</span>
+              <span class="count today-count">3</span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h6>Today's Task</h6>
+
+  <ion-content class="inner-content">
+
+    <div class="todo-cont" [ngStyle]="{'background-color': obj.checked ? '#ceffdb': 'white'}"
+      *ngFor="let obj of todayTaskArr; let index = index">
+      <ion-checkbox class="check" [(ngModel)]="obj.checked"
+        (click)="handleChecked(obj._id, obj.checked)"></ion-checkbox>
+      <div class="todo-name-cont">
+        <span class="todo-name">{{obj.taskname}}</span>
+        <div class="time-cont"><span class="starttime">{{changeTimeFormat(obj.starttime)}}</span> to <span
+            class="endtime">{{changeTimeFormat(obj.endtime)}}</span></div>
+      </div>
+      <div class="icon-cont">
+        <ion-icon name="create-outline" style="color: #757575;" (click)="handleUpdate(obj._id)"></ion-icon>
+        <ion-icon name="trash-outline" style="color: #eb2020;" (click)="handledelete(obj._id)"></ion-icon>
+      </div>
+    </div>
+
+    <div class="empty-cont" style="height: 70px;"></div>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="handleAddTask()">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+
+</ion-content>
